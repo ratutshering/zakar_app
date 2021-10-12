@@ -1,0 +1,7 @@
+{
+  "name": "drukzakar",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

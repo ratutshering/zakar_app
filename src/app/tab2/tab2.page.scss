@@ -1,0 +1,30 @@
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.button-bar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    padding: 10px;
+}
+.button-bar h3{
+    font-family: 'Jomolhari';
+}
+.img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 30px;
+}
+ion-header {
+  ion-toolbar{
+    height: 90px;
+    background-color: #0d0d0d;
+    img{
+      width: 450px;
+    }
+  }
+}

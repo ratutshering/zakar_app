@@ -1,0 +1,128 @@
+<ion-header class="ion-no-border">
+    <ion-toolbar style="text-align: center;">
+      <img src="assets/logo.png">
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" *ngFor="let event of events">
+  <ion-fab vertical="top" horizontal="start" slot="fixed">
+    <ion-fab-button color="success" (click)="previous_day()">
+      <ion-icon name="caret-back-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <ion-fab vertical="top"  horizontal="end" slot="fixed">
+    <ion-fab-button color="success" (click)="next_day()">
+      <ion-icon name="caret-forward-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <ion-toolbar style="text-align: center;">
+
+    <h4 class="Jomolhari">{{event.dzo_year_type}} / {{event.eng_year_type}}</h4>
+    <h6 class="Jomolhari">{{event.dzo_month}} / {{event.eng_month}}</h6>
+    <p class="Jomolhari">{{event.dzo_day}} / {{event.eng_day}}</p>
+    <p class="Jomolhari">ཚེས {{event.dzo_date}} / {{event.date}}</p>
+  </ion-toolbar>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="openCalModal()">
+      <ion-icon name="calendar-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <div style="display: flex; justify-content: center;">
+    <div>
+      <ion-segment color="primary" [(ngModel)]="type" (ionChange)="segmentChanged($event)" scrollable>
+        <ion-segment-button value="dzongkha" checked>
+          <ion-label>Dzongkha</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="english">
+          <ion-label>English</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+    </div>
+</div>
+  <div [ngSwitch]="type">
+    <ion-grid *ngSwitchCase="'dzongkha'" style="margin-top:20px;" class="Jomolhari">
+      <ion-row>
+        <ion-col size="4">སྐར་མ།</ion-col>
+        <ion-col>{{event.dzo_star}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4">ཉིནམ།</ion-col>
+        <ion-col>{{event.dzo_cyclic_animal}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4">རྟེན་འབྲེལ།</ion-col>
+        <ion-col>{{event.tendrel}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4">འཕྱོད་སྦྱོར།</ion-col>
+        <ion-col>{{event.dzo_elemental_combination}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4">འབད་བཏུབ།</ion-col>
+        <ion-col>{{event.dzo_good_day}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4">འབད་མ་བཏུབ།</ion-col>
+        <ion-col>{{event.dzo_bad_day}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4">དུས་ཚོད་བཟང་པོ།</ion-col>
+        <ion-col>{{event.dzo_good_time}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4">བགེགས་ཀྱི་རྒྱུ་ལམ།</ion-col>
+        <ion-col>{{event.dzo_hindrance}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4">མཁའ་འགྲོའི་རྒྱུ་ལམ།</ion-col>
+        <ion-col>{{event.dzo_dakini}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4">ཕྱོགས་བཟང་པོ།</ion-col>
+        <ion-col>{{event.dzo_good_direction}}</ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-grid *ngSwitchCase="'english'" style="margin-top:20px;">
+      <ion-row>
+        <ion-col size="4">star</ion-col>
+        <ion-col>{{event.eng_star}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4">Cyclic Animal</ion-col>
+        <ion-col>{{event.eng_cyclic_animal}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4">Elementary Combination</ion-col>
+        <ion-col>{{event.eng_elemental_combination}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4">Good Day</ion-col>
+        <ion-col>{{event.eng_good_day}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4">Not a Good Day</ion-col>
+        <ion-col>{{event.eng_bad_day}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4">Good Time</ion-col>
+        <ion-col>{{event.eng_good_time}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4">Hindrance Avenue</ion-col>
+        <ion-col>{{event.eng_hindrance}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4">Dakini's Avenue</ion-col>
+        <ion-col>{{event.eng_dakini}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4">Good Direction</ion-col>
+        <ion-col>{{event.eng_good_direction}}</ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+
+</ion-content>
