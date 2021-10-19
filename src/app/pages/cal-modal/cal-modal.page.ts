@@ -9,12 +9,10 @@ import { ModalController } from '@ionic/angular';
 export class CalModalPage implements AfterViewInit {
 
   modalReady = false;
-  calendar: any;
 
   constructor(private modalCtrl: ModalController) { }
 
   ngAfterViewInit() {
-    console.log(this.calendar);
     setTimeout(() => {
       this.modalReady = true;
     }, 0);

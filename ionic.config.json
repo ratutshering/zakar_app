@@ -1,7 +1,8 @@
 {
-  "name": "drukzakar",
+  "name": "Druk Zakar",
   "integrations": {
     "capacitor": {}
   },
-  "type": "angular"
+  "type": "angular",
+  "proxies": [{"path": "/api","proxyUrl": "http://www.drukzakar.com/api"}]
 }

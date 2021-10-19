@@ -1,5 +1,5 @@
-<ion-toolbar color="primary">
-  <ion-title>Bhutanses Calendar</ion-title>
+<ion-toolbar>
+  <ion-title>Bhutanese Calendar</ion-title>
   <ion-buttons slot="end">
     <ion-button (click)="close()">
       <ion-icon name="close" slot="icon-only"></ion-icon>
@@ -8,7 +8,7 @@
 </ion-toolbar>
 
 <ion-content class="ion-padding">
-  <div style="display: flex; align-items: center; justify-content: center; margin-top: 10%;" *ngFor="let item of calendar">
-      <img data-src="{{item.photo}}" height="70%" width="90%">
-  </div>
+  <div style="display: flex; justify-content: center; align-items: center; padding-top: 10%;">
+    <iframe src='https://www.bhutanesecalendar.com/iframe-month' frameborder='0' width='420' height='460'></iframe>
+</div>
 </ion-content>

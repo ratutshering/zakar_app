@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {ModalController} from '@ionic/angular';
+import {AlertController, LoadingController, ModalController, ToastController} from '@ionic/angular';
 import {CalModalPage} from '../pages/cal-modal/cal-modal.page';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 
 @Component({
@@ -15,23 +15,46 @@ export class Tab1Page implements OnInit {
   // eslint-disable-next-line @typescript-eslint/naming-convention
   current_date: any;
   calendar: any;
-  // eslint-disable-next-line @typescript-eslint/naming-convention
+  month: any;
+  error: any;
 
-  constructor(private modalCtrl: ModalController, private http: HttpClient, private datepipe: DatePipe) {}
-  ngOnInit() {
+  constructor(public loadingController: LoadingController,
+              public alertController: AlertController,
+              private modalCtrl: ModalController,
+              private http: HttpClient,
+              private datepipe: DatePipe) {}
+  async ngOnInit() {
+    const loading = await this.loadingController.create({
+      message: 'Please Wait',
+      duration: 1000
+    });
+    await loading.present();
     this.type = 'dzongkha';
     this.current_date = new Date();
+    this.month = this.current_date.toLocaleString('default', { month: 'long' });;
+    console.log(this.month);
     // eslint-disable-next-line @typescript-eslint/naming-convention
     const latest_date =this.datepipe.transform(this.current_date, 'yyyy-MM-dd',);
+
     console.log(latest_date);
-    this.http.get('http://127.0.0.1:8000/api/get_event/' + latest_date).subscribe((data: any) => {
+    this.http.get('https://www.drukzakar.com/api/get_event/' + latest_date).subscribe(async (data: any) => {
       this.events = data;
-    });
-    const month = this.current_date.getMonth() + 1;
-    console.log(month);
-    this.http.get('http://127.0.0.1:8000/api/get_calendar/' + month).subscribe((data: any) => {
-        this.calendar = data;
-    });
+      await loading.onDidDismiss();
+      console.log(this.events);
+    }, async err => {
+        console.log(err);
+        const alert = await this.alertController.create({
+          cssClass: 'my-custom-class',
+          header: 'Net Error',
+          message: 'Check Your Internet Connectivity!',
+          buttons: [
+            {
+              text: 'OK'
+            }]
+        });
+
+        await alert.present();
+      });
   }
 
   segmentChanged(ev: any) {
@@ -42,43 +65,73 @@ export class Tab1Page implements OnInit {
     const modal = await this.modalCtrl.create({
       component: CalModalPage,
       cssClass: 'cal-modal',
-      backdropDismiss: false,
-      componentProps: {
-        calendar: this.calendar
-      }
+      backdropDismiss: false
     });
-
     await modal.present();
   }
 
   // eslint-disable-next-line @typescript-eslint/naming-convention
-  next_day(){
-    this.current_date.setDate(this.current_date.getDate() + 1);
-    const next =this.datepipe.transform(this.current_date, 'yyyy-MM-dd',);
-    console.log(next);
-    this.http.get('http://127.0.0.1:8000/api/get_event/' + next).subscribe((events: any) => {
-      this.events = events;
+  async next_day() {
+    const loading = await this.loadingController.create({
+      message: 'Please Wait',
+      duration: 1000
     });
+    await loading.present();
+    this.current_date.setDate(this.current_date.getDate() + 1);
+    this.month = this.current_date.toLocaleString('default', {month: 'long'});
+    const next = this.datepipe.transform(this.current_date, 'yyyy-MM-dd',);
+    console.log(next);
+    this.http.get('https://www.drukzakar.com/api/get_event/' + next).subscribe(async (events: any) => { //use this address FQDN
+      this.events = events;
+      await loading.onDidDismiss();
+    }, async err => {
+      console.log(err);
+      const alert = await this.alertController.create({
+        cssClass: 'my-custom-class',
+        header: 'Well, Nothing to Worry!',
+        message: 'Coming Soon!',
+        buttons: [
+          {
+            text: 'OK',
+            handler: () => {
+              location.reload();
+            }
+          }]
+      });
 
-    const month = this.current_date.getMonth() + 1;
-    console.log(month);
-    this.http.get('http://127.0.0.1:8000/api/get_calendar/' + month).subscribe((data: any) => {
-      this.calendar = data;
+      await alert.present();
     });
   }
 
-  previous_day(){
-    this.current_date.setDate(this.current_date.getDate() - 1);
-    const previous =this.datepipe.transform(this.current_date, 'yyyy-MM-dd',);
-    console.log(previous);
-    this.http.get('http://127.0.0.1:8000/api/get_event/' + previous).subscribe((events) => {
-      this.events = events;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  async previous_day() {
+    const loading = await this.loadingController.create({
+      message: 'Please Wait',
+      duration: 1000
     });
-
-    const month = this.current_date.getMonth() + 1;
-    console.log(month);
-    this.http.get('http://127.0.0.1:8000/api/get_calendar/' + month).subscribe((data: any) => {
-      this.calendar = data;
+    await loading.present();
+    this.current_date.setDate(this.current_date.getDate() - 1);
+    this.month = this.current_date.toLocaleString('default', {month: 'long'});
+    const previous = this.datepipe.transform(this.current_date, 'yyyy-MM-dd',);
+    console.log(previous);
+    this.http.get('https://www.drukzakar.com/api/get_event/' + previous).subscribe(async (events) => {
+      this.events = events;
+      await loading.onDidDismiss();
+    }, async err => {
+      console.log(err);
+      const alert = await this.alertController.create({
+        cssClass: 'my-custom-class',
+        header: 'Well, Nothing to Worry!',
+        message: 'Coming Soon!',
+        buttons: [
+          {
+            text: 'OK',
+            handler: () => {
+              location.reload();
+            }
+          }]
+      });
+      await alert.present();
     });
   }
 }

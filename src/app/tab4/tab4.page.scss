@@ -1,0 +1,26 @@
+ion-content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.link{
+    display: flex;
+    padding: 20px;
+}
+
+.wrapper {
+  padding-left: 25%;
+  padding-right: 25%;
+}
+
+ion-header {
+  ion-toolbar{
+    height: 90px;
+
+    img{
+      width: 450px;
+    }
+  }
+}
+
+

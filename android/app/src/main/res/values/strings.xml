@@ -2,6 +2,6 @@
 <resources>
     <string name="app_name">drukzakar</string>
     <string name="title_activity_main">drukzakar</string>
-    <string name="package_name">io.ionic.starter</string>
-    <string name="custom_url_scheme">io.ionic.starter</string>
+    <string name="package_name">io.drukzakar.btn</string>
+    <string name="custom_url_scheme">io.drukzakar.btn</string>
 </resources>

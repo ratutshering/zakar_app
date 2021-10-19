@@ -26,6 +26,26 @@ const routes: Routes = [
     path: 'cal-modal',
     loadChildren: () => import('./pages/cal-modal/cal-modal.module').then( m => m.CalModalPageModule)
   },
+  {
+    path: 'tab4',
+    loadChildren: () => import('./tab4/tab4.module').then( m => m.Tab4PageModule)
+  },
+  {
+    path: 'image1',
+    loadChildren: () => import('./image1/image1.module').then( m => m.Image1PageModule)
+  },
+  {
+    path: 'image2',
+    loadChildren: () => import('./image2/image2.module').then( m => m.Image2PageModule)
+  },
+  {
+    path: 'image3',
+    loadChildren: () => import('./image3/image3.module').then( m => m.Image3PageModule)
+  },
+  {
+    path: 'splash',
+    loadChildren: () => import('./splash/splash.module').then( m => m.SplashPageModule)
+  },
 ];
 @NgModule({
   imports: [

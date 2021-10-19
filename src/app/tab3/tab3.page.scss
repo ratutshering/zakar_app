@@ -1,3 +1,14 @@
+.Jomolhari{
+  font-family: Jomolhari;
+  font-size: 20px;
+  padding: 10px;
+}
+
+.body{
+  font-size: 15px;
+  padding: 10px;
+  padding-bottom: 20px;
+}
 .container{
     display: flex;
     justify-content: center;
@@ -16,7 +27,7 @@
 ion-header {
   ion-toolbar{
     height: 90px;
-    background-color: #0d0d0d;
+
     img{
       width: 450px;
     }
